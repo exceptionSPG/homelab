@@ -1,0 +1,10 @@
+wifi_profiles:
+    - conn_name: "added-o2-5"
+      ssid: "o2-WLAN-5GHz-3BEF"
+      psk: "YourWifiPassword"
+    - conn_name: "added-tp-link_5047"
+      ssid: "TP-Link_5047"
+      psk: "yourwifipassword" 
+    - conn_name: "added-tenda_C66510"
+      ssid: "Tenda_C66510"
+      psk: "yourpassword" 
