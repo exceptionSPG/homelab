@@ -1,0 +1,8 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for add-wifi-profiles
+
+isDebug: true
+wifi_interface: wlan0
+key_mgmt: wpa-psk
+

@@ -1,0 +1,54 @@
+---
+- name: Ensure network manager installation
+  ansible.builtin.apt:
+    name: network-manager 
+    state: present
+
+- name: checking network manager (nmcli) version
+  ansible.builtin.shell: 
+    cmd: nmcli -v
+  register: output
+
+- name: print version
+  ansible.builtin.debug:
+    var: output.stdout_lines
+  when: "{{ isDebug | default('false') }}"
+
+- name: list existing connections
+  ansible.builtin.shell:
+    cmd: nmcli connection show
+  register: listcon
+
+- name: print list con
+  ansible.builtin.debug:
+    var: listcon.stdout_lines
+  when: "{{ isDebug | default('false') }}"
+
+- name: Check if wifi_profiles is visible
+  debug:
+        var: role_wifi_profiles
+
+# sudo nmcli connection add type wifi con-name "added-o2-24" ifname wlan0 ssid "o2-WLAN-2.4GHz-3BEE"
+- name: Adding connection profile to rapi
+  become: true
+  community.general.nmcli:
+    type: wifi
+    conn_name: "{{ item.conn_name }}"
+    ifname: "{{ wifi_interface | default('wlan0') }}"
+    ssid: "{{ item.ssid }}"
+    wifi_sec:
+      key-mgmt: "{{ key_mgmt | default('wpa-psk') }}"
+      psk: "{{ item.psk }}"
+    state: present
+  loop: "{{ role_wifi_profiles }}"
+
+- name: list existing connections
+  ansible.builtin.shell:
+    cmd: nmcli connection show
+  register: listcon
+
+- name: print list con
+  ansible.builtin.debug:
+    var: listcon.stdout_lines
+  when: "{{ isDebug | default('false') }}"
+

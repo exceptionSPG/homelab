@@ -5,7 +5,28 @@ Playbook: playbooks/addWifi.yml
       This Playbook takes conn\_name, ssid, and psk (password) values from variables/wifi\_profiles.yml file and adds them to our raspberry pi host. It also uses `isDebug` variable (controlled from commandline) to show connections before and after it adds. 
 
 To run:
-    `ansible-playbook  tasks/addWifi.yml -i inventory --extra-vars "isDebug=true"`
+    `ansible-playbook  playbooks/addWifi.yml -i inventory --extra-vars "isDebug=true"`
+
+### Usage of Roles
+Recently, I discovered the `best practice` for ansible, is to use `roles` instead of bulkier playbook. So, I have refactored our previous playbook to include role: add-wifi-profiles.
+
+Quick about roles:
+Initialize role:
+`ansible-galaxy role init <role-name>` # initializes all the directory of role.
+
+### Usage of ansible-vaule
+I also have used `ansible-vault` to encrypt our wifi password variable file: 
+`ansible-vault encrypt variables/wifi\_profiles.yml`
+
+it will ask for password, remember it. We will need this password to run ansible-playbook.
+
+to view the encrypted content:
+`ansible-vault view variables/wifii\_profiles.yml`
+
+
+run our playbook
+`ansible-playbook  playbooks/addWifiUsingRole.yml -i inventory --extra-vars "isDebug=true" --ask-vault-pass`
+
 
 `nmcli` 
 
