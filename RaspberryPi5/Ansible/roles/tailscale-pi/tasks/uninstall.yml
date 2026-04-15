@@ -1,0 +1,32 @@
+---
+- name: APT dependencies
+  become: true
+  ansible.builtin.apt:
+    name: "{{ tailscale_apt_dependencies }}"
+    cache_valid_time: 3600
+    state: present
+
+- name: Remove Tailscale
+  become: true
+  ansible.builtine.apt:
+    name: "{{ tailscale_package }}"
+    state: absent
+
+- name: Remove Tailscale Deb
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "{{ tailscale_apt_deb }}"
+    state: absent
+    codename: "{{ apt_codename }}"
+
+- name: Remove Tailscale signing key from trusted gpg
+  become: true
+  ansible.builtin.apt_key:
+    url: "{{ tailscale_apt_signing_key }}"
+    state: absent
+
+- name: Remove Tailscale signing key from keyrings
+  become: true
+  ansible.builtin.file:
+    path: "{{ tailscale_apt_keyring_path }}"
+    state: absent

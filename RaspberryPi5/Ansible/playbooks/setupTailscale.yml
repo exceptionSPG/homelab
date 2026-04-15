@@ -1,0 +1,8 @@
+---
+- name: Raspberry Rapi Tailscale setup
+  hosts: rapi
+  vars_files:
+    - ../variables/ts_auth_key.yml
+  roles:
+    - role: roles/tailscale-pi
+ 

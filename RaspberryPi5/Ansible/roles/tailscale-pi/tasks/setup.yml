@@ -1,0 +1,37 @@
+---
+- name: Enable Service
+  become: true
+  ansible.builtin.service:
+    name: "{{ tailscale_service }}"
+    state: started
+    enabled: true
+
+- name: Fetch Tailscale status
+  ansible.builtin.command: tailscale status --json
+  changed_when: false
+  register: tailscale_status
+
+- name: Parse status JSON
+  vars: 
+    tailscale_status_parsed: "{{ tailscale_status.stdout | from_json }}"
+  ansible.builtin.set_fact:
+    tailscale_is_online: "{{ tailscale_status_parsed.Self.Online }}"
+    tailscale_version: "{{ tailscale_status_parsed.Version }}"
+
+- name: Setup | Tailscale version and online status
+  ansible.builtin.debug:
+    msg: "Ver: {{ tailscale_version }} Online: {{ tailscale_is_online }}"
+  
+- name: Setup | Bring Tailscale UP
+  become: true
+  ansible.builtin.command: "tailscale up --auth-key={{ tailscale_authkey }} --ssh"
+  changed_when: true
+  register: tailscale_start
+  when:
+    - not tailscale_up_skip
+  notify: Confirm Tailscale is Connected 
+
+- name: Setup | Register role facts
+  ansible.builtin.include_tasks: facts.yml
+  when:
+    - not tailscale_up_skip

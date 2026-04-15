@@ -1,0 +1,23 @@
+#SPDX-License-Identifier: MIT-0
+---
+# vars file for tailscale-pi
+
+# Variables that an end user should likely never modify
+
+tailscale_package: tailscale
+tailscale_service: tailscaled
+
+apt_codename: trixie
+
+tailscale_apt_dependencies:
+  - gnupg
+  - gnupg-agent
+  - apt-transport-https
+  - python3-apt
+
+apt_keyring_path: /usr/share/keyrings
+tailscale_apt_keyring_path: /usr/share/keyrings/tailscale-archive-keyring.gpg
+tailscale_apt_deb: deb [signed-by={{ tailscale_apt_keyring_path }}] https://pkgs.tailscale.com/stable/debian {{ apt_codename }} main
+
+tailscale_apt_signkey: https://pkgs.tailscale.com/stable/debian/{{ apt_codename }}.noarmor.gpg
+

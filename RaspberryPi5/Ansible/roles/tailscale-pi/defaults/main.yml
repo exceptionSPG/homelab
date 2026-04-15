@@ -1,0 +1,18 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for tailscale-pi
+# Variables that a user may want to modify
+
+
+# Whether to install or uninstall Tailscale. Either 'latest', 'present', or 'absent'
+state: latest
+
+# Required Node Auth key to authenticate to Tailscale
+tailscale_authkey: ""
+
+# Apply provided tags to node
+tailscale_tags: []
+
+
+# Whether to skip `tailscale up`
+tailscale_up_skip: false

@@ -1,0 +1,36 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for tailscale-pi
+- name: State validation
+  ansible.builtin.fail:
+    msg: "'state' must be 'latest', 'present', or 'absent'."
+  when:
+    - state != "latest"
+    - state != "present"
+    - state != "absent"
+
+- name: Tailscale Auth Key required
+  ansible.builtin.fail:
+    msg: >
+      You must include a Node Authorization auth key. 
+      Set a `tailscale_authkey` variable.
+      You can create this key from: https://login.tailscale.com/admin/settings/keys . 
+  when:
+    - not tailscale_authkey
+    - not tailscale_up_skip
+    - state != "absent"
+
+- name: Skipping Authentication 
+  ansible.builtin.debug:
+    msg: You have set `tailscale_up_skip`, so node will not authenticate to your Tailscale network.
+  when: tailscale_up_skip
+
+
+- name: Install Tailscale
+  when: state == "present" or state == "latest"
+  ansible.builtin.include_tasks: install.yml 
+
+
+- name: Uninstall Tailscale
+  when: state == "absent"
+  ansible.builtin.include_tasks: uninstall.yml
