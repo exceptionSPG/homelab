@@ -1,0 +1,12 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for docker-pi
+
+- name: Add repo and install docker
+  ansible.builtin.include_tasks: add_install.yml
+  when:  docker_package_state  == "present" or docker_package_state == "latest"  
+
+- name: Remove Docker from pi
+  ansible.builtin.include_tasks: uninstall.yml
+  when:
+    -  docker_package_state  == "absent" 

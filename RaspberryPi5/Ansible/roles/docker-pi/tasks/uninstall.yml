@@ -1,0 +1,50 @@
+---
+# Stop Docker service (if running)
+#
+# Remove Docker packages (using same docker_packages list)
+#
+# Remove Docker repository file
+#
+# Remove GPG key file
+
+- name: Stop Docker service 
+  become: true
+  ansible.builtin.systemd_service:
+    name: docker 
+    state: stopped
+
+- name: Uninstall docker packages
+  become: true
+  ansible.builtin.apt:
+    name: "{{ docker_packages }}"
+    update_cache: yes
+    state: "{{ docker_package_state }}" 
+
+- name: Removing DEB822 docker repo
+  become: true
+  ignore_errors: yes
+  ansible.builtin.deb822_repository:
+    name: docker
+    types: deb
+    uris: "{{ docker_apt_uri }}" 
+    suites: "{{ codename }}"
+    components: stable
+    architectures: "{{ architecture }}"
+    signed_by: "{{ docker_apt_keyring_path }}"
+    state: 'absent'
+
+
+- name: Remove gpg key 
+  become: true
+  ansible.builtin.file:
+    path: "{{ docker_apt_keyring_path }}"
+    state: 'absent'
+
+- name: Remove Docker data directory
+  become: true
+  ansible.builtin.file:
+    path: /var/lib/docker
+    state: absent
+  when: docker_purge_data_on_remove | default(false)
+
+

@@ -1,0 +1,5 @@
+---
+- name: Install or Uninstall Docker on Raspberry PI
+  hosts: rapi_ts
+  roles: 
+    - roles/docker-pi

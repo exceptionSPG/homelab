@@ -1,0 +1,10 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for docker-pi
+# Variables users are likely to modify
+
+codename: "trixie"
+architecture: "arm64"
+docker_package_state: "latest" #"present" or "latest" or "absent"
+docker_purge_data_on_remove: false #true 
+

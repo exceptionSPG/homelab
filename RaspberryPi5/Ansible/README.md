@@ -55,5 +55,7 @@ sudo nmcli connection add type wifi con-name "added-o2-24" ifname wlan0 ssid "o2
 sudo nmcli connection up <con-name>
 ```
 
+## Docker setup playbook
 
+`ansible-playbook -i inventory playbook/docker.yml -e "docker_pacakge_state=latest"` 
 

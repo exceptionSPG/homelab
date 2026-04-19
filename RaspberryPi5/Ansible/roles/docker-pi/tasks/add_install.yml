@@ -1,0 +1,57 @@
+---
+- name: Install docker dependencies
+  become: true
+  ansible.builtin.apt:
+    name: "{{ docker_dependency_packages }}"
+    update_cache: yes
+    state: present
+
+- name: Remove Obsolete Conflicting packages
+  become: true
+  ansible.builtin.apt:
+    name: "{{ docker_obsolete_packages }}"
+    update_cache: yes
+    state: absent
+
+- name: Download gpg key 
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ docker_apt_signkey }}"
+    dest: "{{ docker_apt_keyring_path }}"
+    mode: '0644'
+
+
+- name: Adding DEB822 repo
+  become: true
+  ansible.builtin.deb822_repository:
+    name: docker
+    types: deb
+    uris: "{{ docker_apt_uri }}" 
+    suites: "{{ codename }}"
+    components: stable
+    architectures: "{{ architecture }}"
+    signed_by: "{{ docker_apt_keyring_path }}"
+
+
+    
+
+- name: Install docker
+  become: true
+  ansible.builtin.apt:
+    name: "{{ docker_packages }}"
+    update_cache: yes
+    state: "{{ docker_package_state }}" 
+    
+- name: Verify docker installation
+  become: true
+  ansible.builtin.systemd_service:
+    name: docker
+    state: started
+
+- name: verify docker version
+  ansible.builtin.command: docker --version
+  register: dockerversion
+
+- name: Display docker version
+  ansible.builtin.debug:
+    msg: "{{ dockerversion }}"
