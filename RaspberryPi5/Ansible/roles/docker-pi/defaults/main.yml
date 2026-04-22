@@ -8,3 +8,6 @@ architecture: "arm64"
 docker_package_state: "latest" #"present" or "latest" or "absent"
 docker_purge_data_on_remove: false #true 
 
+docker_users: []
+#  - user1
+#  - user2
