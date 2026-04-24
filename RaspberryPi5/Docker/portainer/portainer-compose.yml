@@ -9,6 +9,8 @@ services:
     ports:
       - 9443:9443
       - 8000:8000  # Remove if you do not intend to use Edge Agents
+    networks:
+      - proxy-network
 
 volumes:
   portainer_data:
@@ -18,4 +20,6 @@ volumes:
 # docker network create proxy-network --driver bridge
 networks: 
   proxy-network:
+    external: true
     driver: bridge 
+    name: proxy-network
