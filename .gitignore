@@ -1,2 +1,6 @@
 
 *.bak
+# Ignore .env files in current directory and all subdirectories
+**/.env # .env in any folder, any place
+*.env	# all files containing name abc.env
+.env 	# .env file on the root folder
