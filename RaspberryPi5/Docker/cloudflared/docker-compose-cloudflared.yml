@@ -4,8 +4,8 @@ services:
     image: cloudflare/cloudflared
     restart: unless-stopped
     command: tunnel run
-    env_file: 
-      - .env
+    environment:
+      - TUNNEL_TOKEN
     networks:
       - proxy-network #connecting to same Nginx proxy manager network
 
