@@ -1,6 +1,7 @@
 services:
   app:
     image: 'jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
     restart: unless-stopped
     ports:
       # These ports are in format <host-port>:<container-port>
@@ -31,6 +32,7 @@ services:
 
   db:
     image: 'mariadb:latest'
+    container_name: mariadb
     restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD
