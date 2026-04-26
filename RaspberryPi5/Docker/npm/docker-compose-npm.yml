@@ -30,9 +30,8 @@ services:
       - proxy-network
 
   db:
-    image: 'jc21/mariadb-aria:latest'
+    image: 'yobasystems/alpine-mariadb:latest'
     restart: unless-stopped
-    user: "502:502"
     environment:
       - MYSQL_ROOT_PASSWORD
       - MYSQL_DATABASE
