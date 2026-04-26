@@ -30,7 +30,7 @@ services:
       - proxy-network
 
   db:
-    image: 'yobasystems/alpine-mariadb:latest'
+    image: 'mariadb:latest'
     restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD
