@@ -4,7 +4,7 @@ services:
     container_name: wp-blog 
     restart: unless-stopped
     ports:
-      - "3030:80"
+      - '3030:80'
     env_file: .env
     environment:
       - WORDPRESS_DB_HOST=mariadb:3306
