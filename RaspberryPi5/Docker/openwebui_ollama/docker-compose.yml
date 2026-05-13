@@ -1,0 +1,27 @@
+services:
+  openwebui:
+    container_name: openwebui
+    image: ghcr.io/open-webui/open-webui:main-slim
+    ports:
+      - "3000:8080"
+    volumes:
+      - /home/shiva/dockerVolumes/openwebui/data:/app/backend/data
+    networks:
+      - proxy-network
+
+# docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+  ollama:
+    container_name: ollama
+    image: ollama/ollama
+    ports:
+      - "11434:11343"
+    volumes:
+      - /home/shiva/dockerVolumes/ollama/ollama:/root/.ollama
+    networks:
+      - proxy-network
+
+
+networks:
+  proxy-network:
+    external: true
+    name: proxy-network
