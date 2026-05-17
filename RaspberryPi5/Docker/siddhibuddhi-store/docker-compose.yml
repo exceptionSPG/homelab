@@ -1,0 +1,22 @@
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: siddhibuddhi_store 
+    restart: unless-stopped
+    ports:
+      - '3040:80'
+    env_file: .env
+    environment:
+      - WORDPRESS_DB_HOST=mariadb:3306
+      - WORDPRESS_DB_USER
+      - WORDPRESS_DB_PASSWORD
+      - WORDPRESS_DB_NAME
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external: true
+    name: proxy-network
