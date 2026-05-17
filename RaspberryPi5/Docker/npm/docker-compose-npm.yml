@@ -44,6 +44,8 @@ services:
       - ./mysql:/var/lib/mysql
     networks:
       - proxy-network
+    ports:
+      - '9909:3306'
 
 networks:
   proxy-network:
