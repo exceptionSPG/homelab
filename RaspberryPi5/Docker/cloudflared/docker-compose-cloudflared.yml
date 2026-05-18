@@ -10,7 +10,7 @@ services:
       - proxy-out-network #connecting to same Nginx proxy manager network
 
 networks:
-  proxy-network:
+  proxy-out-network:
     external: true
     name: proxy-out-network
 
