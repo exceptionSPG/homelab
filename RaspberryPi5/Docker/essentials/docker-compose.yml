@@ -1,0 +1,51 @@
+######### This sets up essential services ###################
+#
+#
+
+##### #1. NGINX web server
+services:
+#  nginx:
+#    image: nginx:latest
+#    user: "${UID}:${GID}"
+#    ports:
+#      - "80:80"
+#    container_name: nginx
+#    env_file: 
+#      - .env
+#    environment:
+#      - UID
+#      - GID 
+##    networks:
+##      - proxy-network
+#    volumes:
+#      - ./nginx-conf:/etc/nginx
+
+### #2. Mariadb Database
+
+  db:
+    image: 'mariadb:latest'
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      - MARIADB_AUTO_UPGRADE
+    volumes:
+      - $HOME/dockerVolumes/mariadb/mysql:/var/lib/mysql
+    networks:
+      - proxy-network
+    ports:
+      - '9909:3306'
+
+networks:
+  proxy-network:
+    external: true
+    name: proxy-network
+
+#volumes:
+#  mysql:
+#     driver: local
+
+
