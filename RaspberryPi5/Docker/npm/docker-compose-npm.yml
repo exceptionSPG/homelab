@@ -29,6 +29,7 @@ services:
       - db
     networks:
       - proxy-network
+      - proxy-out-network
 
   db:
     image: 'mariadb:latest'
@@ -51,6 +52,9 @@ networks:
   proxy-network:
     external: true
     name: proxy-network
+  proxy-out-network:
+    external: true
+    name: proxy-out-network
 
 volumes:
   mysql:

@@ -7,10 +7,10 @@ services:
     environment:
       - TUNNEL_TOKEN
     networks:
-      - proxy-network #connecting to same Nginx proxy manager network
+      - proxy-out-network #connecting to same Nginx proxy manager network
 
 networks:
   proxy-network:
     external: true
-    name: proxy-network
+    name: proxy-out-network
 
