@@ -1,0 +1,17 @@
+---
+- name: Add/Remove APT packages
+  hosts: rapi_ts
+  become: true
+  
+  pre_tasks:
+    - name: Gather installed packages
+      ansible.builtin.package_facts:
+        manager: apt
+
+    - name: Display current installed packages
+      ansible.builtin.debug:
+        var: ansible_facts.packages.keys() |sort
+      when: inventory_hostname in groups['rapi_ts']
+
+  roles:
+    - roles/apt-packages
