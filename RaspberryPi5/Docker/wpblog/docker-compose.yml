@@ -1,7 +1,7 @@
 services:
-  wordpress:
+  priyankablog:
     image: wordpress:latest
-    container_name: wp-blog 
+    container_name: priyankablog 
     restart: unless-stopped
     ports:
       - '3030:80'
@@ -12,7 +12,7 @@ services:
       - WORDPRESS_DB_PASSWORD
       - WORDPRESS_DB_NAME
     volumes:
-      - ./wordpress:/var/www/html
+      - $USER/dockerVolumes/priyankablog/wordpress:/var/www/html
     networks:
       - proxy-network
 
