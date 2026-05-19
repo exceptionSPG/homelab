@@ -12,7 +12,7 @@ services:
       - WORDPRESS_DB_PASSWORD
       - WORDPRESS_DB_NAME
     volumes:
-      - $USER/dockerVolumes/priyankablog/wordpress:/var/www/html
+      - $HOME/dockerVolumes/priyankablog/wordpress:/var/www/html
     networks:
       - proxy-network
 
