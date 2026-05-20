@@ -3,6 +3,7 @@ services:
     image: wordpress:latest
     container_name: priyankablog 
     restart: unless-stopped
+    user: "1000:1000"
     ports:
       - '3030:80'
     env_file: .env
