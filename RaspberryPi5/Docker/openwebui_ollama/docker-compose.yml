@@ -5,7 +5,7 @@ services:
     ports:
       - "3000:8080"
     volumes:
-      - /home/shiva/dockerVolumes/openwebui/data:/app/backend/data
+      - $HOME/dockerVolumes/openwebui/data:/app/backend/data
     networks:
       - proxy-network
 
@@ -16,7 +16,7 @@ services:
     ports:
       - "11434:11343"
     volumes:
-      - /home/shiva/dockerVolumes/ollama/ollama:/root/.ollama
+      - $HOME/dockerVolumes/ollama/ollama:/root/.ollama
     networks:
       - proxy-network
 
