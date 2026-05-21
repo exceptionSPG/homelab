@@ -1,6 +1,6 @@
 ---
 - name: Add/Remove APT packages
-  hosts: rapi_ts
+  hosts: "{{ variable_host | default('rapi') }}" 
   become: true
   
   pre_tasks:

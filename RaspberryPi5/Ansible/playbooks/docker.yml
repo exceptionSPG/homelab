@@ -1,5 +1,5 @@
 ---
 - name: Install or Uninstall Docker on Raspberry PI
-  hosts: rapi_ts
+  hosts: "{{ variable_host | default('rapi') }}" 
   roles: 
     - roles/docker-pi
