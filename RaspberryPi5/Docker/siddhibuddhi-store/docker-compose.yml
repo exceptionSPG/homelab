@@ -1,10 +1,11 @@
 services:
-  wordpress:
+  siddhibuddhi_wp:
     image: wordpress:latest
-    container_name: siddhibuddhi_store 
+    container_name: siddhibuddhi_wp 
     restart: unless-stopped
+    user: "1000:1000"
     ports:
-      - '3040:80'
+      - '3030:80'
     env_file: .env
     environment:
       - WORDPRESS_DB_HOST=mariadb:3306
@@ -12,7 +13,7 @@ services:
       - WORDPRESS_DB_PASSWORD
       - WORDPRESS_DB_NAME
     volumes:
-      - ./wordpress:/var/www/html
+      - $HOME/dockerVolumes/siddhibuddhi/mainsite:/var/www/html
     networks:
       - proxy-network
 
