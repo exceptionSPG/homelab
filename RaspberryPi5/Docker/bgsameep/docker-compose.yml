@@ -1,0 +1,21 @@
+services:
+  bgsameep_wp:
+    image: wordpress:latest
+    container_name: bgsameep_wp 
+    restart: unless-stopped
+    user: "1000:1000"
+    env_file: .env
+    environment:
+      - WORDPRESS_DB_HOST=mariadb:3306
+      - WORDPRESS_DB_USER
+      - WORDPRESS_DB_PASSWORD
+      - WORDPRESS_DB_NAME
+    volumes:
+      - $HOME/dockerVolumes/bgsameep/mainsite:/var/www/html
+    networks:
+      - proxy-network
+
+networks:
+  proxy-network:
+    external: true
+    name: proxy-network
