@@ -48,6 +48,7 @@ services:
      - PMA_HOST=db
     restart: always
     volumes:
+     - $HOME/dockerVolumes/phpmyadmin/phpmyadmin:/etc/phpmyadmin
      - $HOME/dockerVolumes/phpmyadmin/sessions:/sessions
     networks:
       - proxy-network
