@@ -42,6 +42,7 @@ services:
   phpmyadmin:
     image: phpmyadmin
     container_name: phpmyadmin
+    user: "1000:1000"
     environment:
      - PMA_ARBITRARY=1
     restart: always
