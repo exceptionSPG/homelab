@@ -38,6 +38,17 @@ services:
       - proxy-network
     ports:
       - '9909:3306'
+    
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+    restart: always
+    volumes:
+     - $HOME/dockerVolumes/phpmyadmin/sessions:/sessions
+    networks:
+      - proxy-network
 
 networks:
   proxy-network:
