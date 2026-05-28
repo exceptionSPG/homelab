@@ -10,8 +10,8 @@ services:
       - WEBUI_PORT=8088
       - TORRENTING_PORT=6881
     volumes:
-      - /home/shiva/dockerVolumes/qbittorrent/appdata:/config
-      - /home/shiva/dockerVolumes/qbittorrent/tdownloads:/downloads #optional
+      - $HOME/dockerVolumes/qbittorrent/appdata:/config
+      - $HOME/dockerVolumes/qbittorrent/tdownloads:/downloads #optional
     ports:
       - 8088:8080
       - 6881:6881
