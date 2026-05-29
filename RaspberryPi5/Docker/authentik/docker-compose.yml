@@ -1,5 +1,6 @@
 services:
   postgresql:
+    container_name: postgresql
     env_file:
     - .env
     environment:
@@ -22,6 +23,7 @@ services:
       - proxy-network
 
   server:
+    container_name: authentik_server
     command: server
     depends_on:
       postgresql:
@@ -47,6 +49,7 @@ services:
       - proxy-network
 
   worker:
+    container_name: authentik_worker
     command: worker
     depends_on:
       postgresql:
