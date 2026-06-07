@@ -1,0 +1,49 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for add-mariadb-db-and-user
+
+- name: Ensure Pre-requisite Packages are Installed
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - python3-pymysql
+
+- name: Create MariaDB Databases
+  community.mysql.mysql_db:
+    login_user: root
+    login_password: "{{ root_password }}"
+    login_host: localhost
+    login_port: 9909
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  loop: "{{ db_names }}"
+  register: db_creation_results
+
+- name: Debug Database Creation Results
+  debug:
+    msg: "Database '{{ item.item.name }}' creation result: {{ item }}"
+  loop: "{{ db_creation_results.results }}"
+
+
+- name: Create MariaDB Users and Grant Privileges
+  community.mysql.mysql_user:
+    login_user: root
+    login_password: "{{ root_password }}"
+    login_host: localhost
+    login_port: 9909
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    priv: "{{ item.priv }}"
+    host: "{{ item.host }}"
+    state: "{{ item.state }}"
+  loop: "{{ db_users }}"
+  register: user_creation_results
+
+- name: Debug User Creation Results
+  debug:
+    msg: "User '{{ item.item.name }}' creation result: {{ item }}"
+  loop: "{{ user_creation_results.results }}"
+
+
+

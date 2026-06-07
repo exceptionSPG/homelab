@@ -1,0 +1,18 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for add-mariadb-db-and-user
+#
+# These variables are defined in inventory/group_vars/<group_name>.yml file
+# example: inventory/group_vars/rapi_ts.yml
+root_password: mysecretpassword
+
+db_users:
+  - name: myuser  
+    password: mypassword
+    priv: "*.*:ALL"
+    host: '%'
+    state: present
+
+db_names:
+  - name: my_db
+    state: present
