@@ -1,5 +1,13 @@
 # Ansible Playbooks
 
+
+## master playbook
+playbooks/master.yml
+    This playbook contains tags to select which roles to run or skip. 
+
+usage:
+    `ansible-playbook -i inventory playbooks/master.yml --extra-vars="target_hosts=rapi_ts" --tags apt` 
+
 ## Adding multiple WiFi networks
 Playbook: playbooks/addWifi.yml
       This Playbook takes conn\_name, ssid, and psk (password) values from variables/wifi\_profiles.yml file and adds them to our raspberry pi host. It also uses `isDebug` variable (controlled from commandline) to show connections before and after it adds. 

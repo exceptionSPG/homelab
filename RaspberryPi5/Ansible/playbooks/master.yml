@@ -1,0 +1,26 @@
+---
+- name: Full server configuration
+  hosts: "{{ target_hosts | default('rapi') }}"
+  become: true
+  
+  pre_tasks:
+    - name: Gather package facts when needed
+      ansible.builtin.package_facts:
+        manager: apt
+      when: run_apt_packages | default(false) | bool
+  
+  roles:
+    - role: roles/apt-packages
+      tags: [ 'packages', 'apt' ]
+    
+    - role: roles/add-mariadb-db-and-user
+      tags: [ 'database', 'mariadb' ]
+    
+    - role: roles/add-wifi-profiles
+      tags: [ 'wifi', 'network' ]
+    
+    - role: roles/docker-pi
+      tags: [ 'docker' ]
+
+    - role: roles/tailscale-pi
+      tags: [ 'tailscale' ]
