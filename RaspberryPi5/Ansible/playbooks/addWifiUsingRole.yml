@@ -1,9 +1,7 @@
 ---
 - name: Adding wifi profiles
-  hosts: rapi
+  hosts: "{{ variable_host | default('rapi') }}"
   gather_facts: no 
-  vars_files: 
-    - ../variables/wifi_profiles.yml
   roles:
     - role:  roles/add-wifi-profiles
       vars:

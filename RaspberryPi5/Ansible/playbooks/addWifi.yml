@@ -2,7 +2,6 @@
 - name: Adding multiple wifi connections profile
   hosts: rapi
   gather_facts: no
-  vars_files: ../variables/wifi_profiles.yml
   tasks:
     - name: Ensure network manager installation
       ansible.builtin.apt:
