@@ -1,0 +1,13 @@
+#SPDX-License-Identifier: MIT-0
+---
+# defaults file for apt-packages
+# apt_packages variable is defined in inventory/group_vars/<group_name>.yml file 
+# this is example:
+apt_packages:
+  - name: tree
+    state: absent
+    
+
+
+
+
