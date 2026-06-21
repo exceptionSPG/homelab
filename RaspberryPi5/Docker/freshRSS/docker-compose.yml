@@ -3,6 +3,7 @@ services:
     image: freshrss/freshrss:edge
     container_name: freshrss
     restart: unless-stopped
+    user: "1000:1000"
     logging:
       options:
         max-size: 10m
