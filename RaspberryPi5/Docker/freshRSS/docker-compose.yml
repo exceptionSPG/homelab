@@ -53,7 +53,7 @@ services:
         --db-base ${DB_BASE}
         --db-host ${DB_HOST}
         --db-password ${DB_PASSWORD}
-        --db-type pgsql
+        --db-type mysql
         --db-user ${DB_USER}
         --default-user admin
         --language en
