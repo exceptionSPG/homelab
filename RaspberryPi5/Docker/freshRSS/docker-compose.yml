@@ -3,7 +3,7 @@ services:
     image: freshrss/freshrss:edge
     container_name: freshrss
     restart: unless-stopped
-    user: "1000:1000"
+#    user: "1000:1000" Removing custom user due to error on start
     logging:
       options:
         max-size: 10m
