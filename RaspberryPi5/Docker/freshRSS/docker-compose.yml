@@ -73,6 +73,6 @@ services:
       retries: 3
 
 networks:
-    proxy_network:
-      name: proxy_network
+    proxy-network:
+      name: proxy-network
       external: true
