@@ -16,6 +16,8 @@ services:
     restart: always
     networks:
       - proxy-network
+    ports:
+      - "$SSH_PORT:22"
     volumes:
       - $HOME/dockerVolumes/gitea/gitea:/data
       - /etc/timezone:/etc/timezone:ro
