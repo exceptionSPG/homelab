@@ -11,6 +11,7 @@ services:
       - /media/audiobooks/metadata:/metadata
     environment:
       - TZ=Europe/Paris
+    restart: unless-stopped
     networks:
       - proxy-network
 
